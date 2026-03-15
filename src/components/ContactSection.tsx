@@ -7,7 +7,6 @@ import { toast } from "sonner";
 const contactSchema = z.object({
   nombre: z.string().trim().min(1, "El nombre es requerido").max(100),
   telefono: z.string().trim().min(1, "El teléfono es requerido").max(30),
-  email: z.string().trim().email("Email inválido").max(255),
   mensaje: z.string().trim().min(1, "El mensaje es requerido").max(1000),
 });
 
@@ -30,10 +29,11 @@ const address = "Av. Pres. Castillo 1900, K4700 San Fernando del Valle de Catama
 const googleMapsUrl = "https://maps.google.com/?q=-28.4568568,-65.7471412&z=18";
 
 const ContactSection = () => {
-  const [form, setForm] = useState({ nombre: "", telefono: "", email: "", mensaje: "" });
+  const [form, setForm] = useState({ nombre: "", telefono: "", mensaje: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = contactSchema.safeParse(form);
     if (!result.success) {
@@ -44,13 +44,35 @@ const ContactSection = () => {
       setErrors(fieldErrors);
       return;
     }
+    
     setErrors({});
-    const msg = encodeURIComponent(
-      `Hola Dumor Hnos! Soy ${result.data.nombre}. ${result.data.mensaje} Tel: ${result.data.telefono} Email: ${result.data.email}`
-    );
-    window.open(`https://wa.me/${contacts[0].whatsapp}?text=${msg}`, "_blank");
-    toast.success("¡Redirigiendo a WhatsApp!");
-    setForm({ nombre: "", telefono: "", email: "", mensaje: "" });
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://hook.us2.make.com/6tvpqkhszwi6hqsg76g3ycgxaqv746io', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: result.data.nombre,
+          telefono: result.data.telefono,
+          mensaje: result.data.mensaje
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.");
+        setForm({ nombre: "", telefono: "", mensaje: "" });
+      } else {
+        throw new Error('Error al enviar el mensaje');
+      }
+    } catch (error) {
+      toast.error("Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente.");
+      console.error('Error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -197,18 +219,6 @@ const ContactSection = () => {
               {errors.telefono && <p className="text-destructive text-xs mt-1">{errors.telefono}</p>}
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">Email</label>
-              <input
-                id="email"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className={inputClass}
-                placeholder="tu@email.com"
-              />
-              {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
-            </div>
-            <div>
               <label htmlFor="mensaje" className="block text-sm font-medium text-foreground mb-1.5">Mensaje</label>
               <textarea
                 id="mensaje"
@@ -222,9 +232,10 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-semibold text-sm hover:bg-wood-hover transition-colors"
+              disabled={isSubmitting}
+              className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-semibold text-sm hover:bg-wood-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Enviar Consulta
+              {isSubmitting ? "Enviando..." : "Enviar Consulta"}
             </button>
           </motion.form>
         </div>
