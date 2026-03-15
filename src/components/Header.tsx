@@ -20,9 +20,16 @@ const Header = () => {
   }, []);
 
   const scrollTo = (href: string) => {
+    console.log('Scrolling to:', href); // Debug
     setIsMobileOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
+    // Pequeño delay para que el menú se cierre antes del scroll
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      console.log('Element found:', el); // Debug
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   return (
@@ -87,15 +94,25 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => scrollTo(item.href)}
-                  className="text-left text-base font-medium text-gray-800 hover:text-orange-500 py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log('Clicked:', item.label, item.href); // Debug
+                    scrollTo(item.href);
+                  }}
+                  className="text-left text-base font-medium text-gray-800 hover:text-orange-500 py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                  type="button"
                 >
                   {item.label}
                 </button>
               ))}
               <button
-                onClick={() => scrollTo("#contacto")}
-                className="bg-orange-500 text-white px-8 py-3 rounded-md text-base font-semibold hover:bg-orange-600 transition-colors mt-4"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Clicked: Solicitar Presupuesto'); // Debug
+                  scrollTo("#contacto");
+                }}
+                className="bg-orange-500 text-white px-8 py-3 rounded-md text-base font-semibold hover:bg-orange-600 transition-colors mt-4 cursor-pointer"
+                type="button"
               >
                 Solicitar Presupuesto
               </button>
