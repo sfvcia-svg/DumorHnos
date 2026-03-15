@@ -36,23 +36,14 @@ const CategoriesSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="group relative overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+            className="relative overflow-hidden rounded-lg aspect-[3/4]"
           >
             <img
               src={cat.image}
               alt={cat.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <h3 className="text-xl font-display font-semibold text-secondary-foreground mb-3">
-                {cat.title}
-              </h3>
-              <span className="inline-block text-sm font-medium text-primary border-b border-primary pb-0.5 group-hover:text-wood-hover transition-colors">
-                Ver proyectos →
-              </span>
-            </div>
           </motion.div>
         ))}
       </div>

@@ -8,6 +8,7 @@ const navItems = [
   { label: "Cocinas", href: "#categorias" },
   { label: "Placares", href: "#categorias" },
   { label: "Muebles a Medida", href: "#categorias" },
+  { label: "Aberturas", href: "#categorias" },
   { label: "Nosotros", href: "#proceso" },
   { label: "Contacto", href: "#contacto" },
 ];
