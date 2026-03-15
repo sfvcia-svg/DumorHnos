@@ -28,11 +28,11 @@ const HeroSection = () => {
           className="max-w-2xl"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-secondary-foreground leading-tight mb-6">
-            Muebles a medida que transforman tu hogar
+            Carpinteria de Aluminio y Muebles a medida que transforman tu hogar
           </h1>
           <p className="text-lg md:text-xl text-secondary-foreground/80 mb-8 font-light leading-relaxed">
             Diseñamos y fabricamos cocinas, placares y muebles personalizados con
-            materiales de alta calidad y terminaciones modernas.
+            materiales de alta calidad y terminaciones modernas. Como tambien fabricamos todo tipo de aberturas en aluminio.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button
