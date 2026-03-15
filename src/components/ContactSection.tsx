@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, User } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 
@@ -11,7 +11,23 @@ const contactSchema = z.object({
   mensaje: z.string().trim().min(1, "El mensaje es requerido").max(1000),
 });
 
-const WHATSAPP_NUMBER = "5491112345678";
+const contacts = [
+  {
+    name: "Martin",
+    area: "Muebles",
+    phone: "3834921759",
+    whatsapp: "543834921759"
+  },
+  {
+    name: "Pablo", 
+    area: "Aberturas",
+    phone: "3834932555",
+    whatsapp: "543834932555"
+  }
+];
+
+const address = "Av. Pres. Castillo 1900, K4700 San Fernando del Valle de Catamarca, Catamarca";
+const googleMapsUrl = "https://maps.google.com/?q=-28.4568568,-65.7471412&z=18";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ nombre: "", telefono: "", email: "", mensaje: "" });
@@ -32,7 +48,7 @@ const ContactSection = () => {
     const msg = encodeURIComponent(
       `Hola Dumor Hnos! Soy ${result.data.nombre}. ${result.data.mensaje} Tel: ${result.data.telefono} Email: ${result.data.email}`
     );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${contacts[0].whatsapp}?text=${msg}`, "_blank");
     toast.success("¡Redirigiendo a WhatsApp!");
     setForm({ nombre: "", telefono: "", email: "", mensaje: "" });
   };
@@ -66,29 +82,40 @@ const ContactSection = () => {
             className="space-y-8"
           >
             <div className="space-y-6">
-              <a href="tel:+5491112345678" className="flex items-center gap-4 text-foreground hover:text-primary transition-colors">
-                <div className="w-12 h-12 rounded-full bg-wood-light flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Teléfono</p>
-                  <p className="font-medium">+54 11 1234-5678</p>
-                </div>
-              </a>
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 text-foreground hover:text-primary transition-colors"
-              >
-                <div className="w-12 h-12 rounded-full bg-wood-light flex items-center justify-center shrink-0">
-                  <MessageCircle className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">WhatsApp</p>
-                  <p className="font-medium">+54 11 1234-5678</p>
-                </div>
-              </a>
+              {/* Contactos */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-foreground mb-3">Nuestros Contactos</h3>
+                {contacts.map((contact, index) => (
+                  <div key={index} className="bg-card rounded-lg p-4 border border-border">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-wood-light flex items-center justify-center">
+                        <User className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">{contact.name}</p>
+                        <p className="text-sm text-muted-foreground">{contact.area}</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2 ml-13">
+                      <a href={`tel:+54${contact.phone}`} className="flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors">
+                        <Phone className="w-4 h-4" />
+                        <span>{contact.phone}</span>
+                      </a>
+                      <a
+                        href={`https://wa.me/${contact.whatsapp}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Email */}
               <a href="mailto:info@dumorhnos.com" className="flex items-center gap-4 text-foreground hover:text-primary transition-colors">
                 <div className="w-12 h-12 rounded-full bg-wood-light flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-primary" />
@@ -98,26 +125,42 @@ const ContactSection = () => {
                   <p className="font-medium">info@dumorhnos.com</p>
                 </div>
               </a>
-              <div className="flex items-center gap-4">
+
+              {/* Dirección */}
+              <a 
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 text-foreground hover:text-primary transition-colors"
+              >
                 <div className="w-12 h-12 rounded-full bg-wood-light flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Ubicación</p>
-                  <p className="font-medium text-foreground">Buenos Aires, Argentina</p>
+                  <p className="font-medium text-foreground">{address}</p>
                 </div>
-              </div>
+              </a>
             </div>
 
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-whatsapp text-secondary-foreground px-8 py-3.5 rounded-md font-semibold text-sm hover:bg-whatsapp-hover transition-colors"
-            >
-              <MessageCircle className="w-5 h-5" />
-              Contactar por WhatsApp
-            </a>
+            {/* Botones WhatsApp */}
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium text-muted-foreground">Contactar por WhatsApp</h4>
+              <div className="flex flex-col sm:flex-row gap-3">
+                {contacts.map((contact, index) => (
+                  <a
+                    key={index}
+                    href={`https://wa.me/${contact.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-whatsapp text-secondary-foreground px-6 py-3 rounded-md font-semibold text-sm hover:bg-whatsapp-hover transition-colors"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    {contact.name} - {contact.area}
+                  </a>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           {/* Form */}

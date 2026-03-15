@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import catCocinas from "@/assets/cat-cocinas.jpg";
-import catPlacares from "@/assets/cat-placares.jpg";
-import catTv from "@/assets/cat-tv.jpg";
-import catEscritorios from "@/assets/cat-escritorios.jpg";
 
 const categories = [
-  { title: "Cocinas a Medida", image: catCocinas },
-  { title: "Placares y Vestidores", image: catPlacares },
-  { title: "Muebles de TV y Living", image: catTv },
-  { title: "Dormitorios y Escritorios", image: catEscritorios },
+  { title: "Cocinas a Medida", image: "/muebles/481030108_8744190735684973_7665044735022357421_n.jpg" },
+  { title: "Placares y Vestidores", image: "/muebles/118194694_2907565276014244_5388719589011500868_n.jpg" },
+  { title: "Muebles de TV y Living", image: "/muebles/481181218_8803105086460204_4071323596374241234_n.jpg" },
+  { title: "Dormitorios y Escritorios", image: "/muebles/481274661_8808240915946621_4284152639265031695_n.jpg" },
+  { title: "Aberturas de Aluminio", image: "/aluminio/tmp52k8jjjc.png" },
+  { title: "Puertas y Ventanas", image: "/aluminio/tmp5ded5ezl.png" },
+  { title: "Cortinas de Aluminio", image: "/aluminio/tmpd_7j8swt.png" },
+  { title: "Cerramientos y Terrazas", image: "/aluminio/tmpfo00yf6_.png" },
 ];
 
 const CategoriesSection = () => (
@@ -56,6 +56,30 @@ const CategoriesSection = () => (
           </motion.div>
         ))}
       </div>
+
+      {/* Sección adicional de imágenes destacadas */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-20"
+      >
+        <h3 className="text-2xl font-display font-bold text-foreground mb-8 text-center">
+          Nuestros Trabajos Destacados
+        </h3>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <img src="/muebles/481281062_8808240892613290_3822932019260653264_n.jpg" alt="Trabajo destacado 1" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/muebles/482223827_8803105419793504_7251535500776921059_n.jpg" alt="Trabajo destacado 2" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/muebles/53340216_1861924487245000_4524058476451725312_n.jpg" alt="Trabajo destacado 3" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/muebles/55485895_1889928451111270_9004531530294362112_n.jpg" alt="Trabajo destacado 4" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/muebles/55658742_1889928417777940_7550565962500538368_n.jpg" alt="Trabajo destacado 5" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/aluminio/tmph5grc2ge.png" alt="Aluminio destacado 1" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/aluminio/tmpjlhbbkrh.png" alt="Aluminio destacado 2" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/aluminio/tmpnxfh2p6t.png" alt="Aluminio destacado 3" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/aluminio/tmpqj4v9xxx.png" alt="Aluminio destacado 4" className="w-full h-40 object-cover rounded-lg" />
+          <img src="/aluminio/tmps3e1dxrj.png" alt="Aluminio destacado 5" className="w-full h-40 object-cover rounded-lg" />
+        </div>
+      </motion.div>
     </div>
   </section>
 );

@@ -32,15 +32,17 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-card/95 backdrop-blur-md shadow-sm"
-          : "bg-card"
+          ? "bg-gray-400/95 backdrop-blur-md shadow-sm border-b border-gray-700"
+          : "bg-gray-400 border-b border-gray-700"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-4">
-        <button onClick={() => scrollTo("#inicio")} className="flex items-center gap-2">
-          <span className="text-2xl font-display font-bold text-foreground tracking-tight">
-            Dumor <span className="text-primary">Hnos</span>
-          </span>
+        <button onClick={() => scrollTo("#inicio")} className="flex items-center gap-2 p-2 rounded-lg bg-white/80 backdrop-blur-sm">
+          <img 
+            src="/logo.jpg" 
+            alt="Dumor Hnos - Muebles y Aberturas a Medida" 
+            className="h-14 w-auto object-contain drop-shadow-md"
+          />
         </button>
 
         {/* Desktop nav */}
@@ -49,7 +51,7 @@ const Header = () => {
             <button
               key={item.label}
               onClick={() => scrollTo(item.href)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-white hover:text-orange-400 transition-colors"
             >
               {item.label}
             </button>
@@ -59,7 +61,7 @@ const Header = () => {
         <div className="hidden lg:block">
           <button
             onClick={() => scrollTo("#contacto")}
-            className="bg-primary text-primary-foreground px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-wood-hover transition-colors"
+            className="bg-orange-500 text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-orange-600 transition-colors"
           >
             Solicitar Presupuesto
           </button>
@@ -68,7 +70,7 @@ const Header = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="lg:hidden text-foreground p-2"
+          className="lg:hidden text-white p-2"
           aria-label="Menú"
         >
           {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -82,7 +84,7 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-card border-t border-border overflow-hidden"
+            className="lg:hidden bg-white border-t border-gray-200 overflow-hidden"
           >
             <nav className="container mx-auto py-4 flex flex-col gap-3">
               {navItems.map((item) => (
