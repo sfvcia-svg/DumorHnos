@@ -19,7 +19,7 @@ const contacts = [
   },
   {
     name: "Pablo", 
-    area: "Aberturas",
+    area: "Aluminio",
     phone: "3834932555",
     whatsapp: "543834932555"
   }
