@@ -113,7 +113,7 @@ const ContactSection = () => {
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-green-600 text-secondary-foreground px-8 py-3.5 rounded-md font-semibold text-sm hover:bg-green-700 transition-colors"
+              className="inline-flex items-center gap-2 bg-whatsapp text-secondary-foreground px-8 py-3.5 rounded-md font-semibold text-sm hover:bg-whatsapp-hover transition-colors"
             >
               <MessageCircle className="w-5 h-5" />
               Contactar por WhatsApp
