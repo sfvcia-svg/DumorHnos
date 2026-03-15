@@ -5,10 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   { label: "Inicio", href: "#inicio" },
   { label: "Trabajos", href: "#trabajos" },
-  { label: "Cocinas", href: "#categorias" },
-  { label: "Placares", href: "#categorias" },
-  { label: "Muebles a Medida", href: "#categorias" },
-  { label: "Aberturas", href: "#categorias" },
   { label: "Nosotros", href: "#proceso" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -47,12 +43,12 @@ const Header = () => {
         </button>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-8" aria-label="Navegación principal">
+        <nav className="hidden lg:flex items-center gap-6" aria-label="Navegación principal">
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => scrollTo(item.href)}
-              className="text-sm font-medium text-white hover:text-orange-400 transition-colors"
+              className="text-base font-medium text-white hover:text-orange-400 transition-colors px-3 py-2 rounded-lg hover:bg-white/10"
             >
               {item.label}
             </button>
@@ -62,7 +58,7 @@ const Header = () => {
         <div className="hidden lg:block">
           <button
             onClick={() => scrollTo("#contacto")}
-            className="bg-orange-500 text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-orange-600 transition-colors"
+            className="bg-orange-500 text-white px-8 py-3 rounded-md text-base font-semibold hover:bg-orange-600 transition-colors"
           >
             Solicitar Presupuesto
           </button>
@@ -87,19 +83,19 @@ const Header = () => {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-t border-gray-200 overflow-hidden"
           >
-            <nav className="container mx-auto py-4 flex flex-col gap-3">
+            <nav className="container mx-auto py-4 flex flex-col gap-4">
               {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollTo(item.href)}
-                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground py-2 transition-colors"
+                  className="text-left text-base font-medium text-gray-800 hover:text-orange-500 py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   {item.label}
                 </button>
               ))}
               <button
                 onClick={() => scrollTo("#contacto")}
-                className="bg-primary text-primary-foreground px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-wood-hover transition-colors mt-2"
+                className="bg-orange-500 text-white px-8 py-3 rounded-md text-base font-semibold hover:bg-orange-600 transition-colors mt-4"
               >
                 Solicitar Presupuesto
               </button>

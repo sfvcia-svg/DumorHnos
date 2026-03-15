@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-display font-bold mb-4">Dumor Hnos</h3>
             <p className="text-secondary-foreground/60 text-sm leading-relaxed">
-              Carpintería y muebles a medida. Diseño, fabricación e instalación
+              Carpintería de aluminio y muebles a medida. Diseño, fabricación e instalación
               de soluciones personalizadas para tu hogar.
             </p>
           </div>
