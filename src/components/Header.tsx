@@ -24,12 +24,15 @@ const Header = () => {
     setIsMobileOpen(false);
     // Pequeño delay para que el menú se cierre antes del scroll
     setTimeout(() => {
-      const el = document.querySelector(href);
+      const el = document.querySelector(href) as HTMLElement;
       console.log('Element found:', el); // Debug
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.scrollTo({
+          top: el.offsetTop - 80, // Ajuste para el header fijo
+          behavior: 'smooth'
+        });
       }
-    }, 100);
+    }, 200);
   };
 
   return (
@@ -89,6 +92,7 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-t border-gray-200 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
             <nav className="container mx-auto py-4 flex flex-col gap-4">
               {navItems.map((item) => (
